@@ -10,12 +10,9 @@ from .forms import ExpenseForm
 
 def landing_page(request):
     """
-    Public landing page at the root URL (port 8000 /).
-    If user is already signed in, redirects straight to their personal dashboard.
+    Redirects to the main frontend at root (/).
     """
-    if request.user.is_authenticated:
-        return redirect('expenses:dashboard')
-    return render(request, 'expenses/landing.html')
+    return redirect('/')
 
 
 def custom_404_view(request, exception=None):
