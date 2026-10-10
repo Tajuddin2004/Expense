@@ -55,10 +55,13 @@ function navigateTo(viewName) {
     link.classList.toggle('active', link.dataset.view === viewName);
   });
 
-  // Toggle "Back to Home" navbar button (hidden when on landing, visible on 404/dashboard/expenses)
+  // Close any open modals
+  document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+
+  // Ensure Back to Home button is always visible
   const backHomeBtn = document.getElementById('btn-back-home');
   if (backHomeBtn) {
-    backHomeBtn.style.display = (State.currentView === 'landing') ? 'none' : 'inline-flex';
+    backHomeBtn.style.display = 'inline-flex';
   }
 
   // Load view-specific data
@@ -457,4 +460,20 @@ async function handleConfirmDelete() {
 // Initialization on DOM load
 document.addEventListener('DOMContentLoaded', () => {
   checkAuth();
+
+  // Close modals when clicking backdrop overlay
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+      }
+    });
+  });
+
+  // Close modals on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+    }
+  });
 });

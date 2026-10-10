@@ -268,7 +268,7 @@
         <div class="modal-card">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 class="card-title">Create Account</h3>
-                <button onclick="closeModal('modal-signup')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-signup')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <form onsubmit="handleSignup(event)">
@@ -302,6 +302,11 @@
                 <div style="text-align: center; margin-top: 1.25rem; font-size: 0.875rem;">
                     Already have an account? <a onclick="showAuthModal('signin')" style="color: var(--primary); font-weight: 600; cursor: pointer;">Sign In</a>
                 </div>
+                <div style="text-align: center; margin-top: 0.75rem;">
+                    <a onclick="closeModal('modal-signup'); navigateTo('landing');" style="color: var(--mist); font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        &larr; Back to Home
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -309,12 +314,14 @@
     <!-- Modal: Verify OTP -->
     <div id="modal-otp" class="modal-overlay">
         <div class="modal-card">
-            <div class="card-header" style="text-align: center; display: block;">
-                <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">📩</div>
-                <h3 class="card-title" style="font-size: 1.4rem;">Verify 6-Digit Code</h3>
-                <p style="font-size: 0.85rem; color: var(--slate-500); margin-top: 0.25rem;">
-                    Sent to <strong id="otp-target-email"></strong>
-                </p>
+            <div class="card-header" style="justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h3 class="card-title" style="font-size: 1.4rem;">Verify 6-Digit Code</h3>
+                    <p style="font-size: 0.85rem; color: var(--slate-500); margin-top: 0.25rem;">
+                        Sent to <strong id="otp-target-email"></strong>
+                    </p>
+                </div>
+                <button class="modal-close-btn" onclick="closeModal('modal-otp')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <form onsubmit="handleVerifyOtp(event)">
@@ -330,6 +337,11 @@
                 <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--slate-500);">
                     Didn't receive the email? <a onclick="handleResendOtp()" style="color: var(--primary); font-weight: 600; cursor: pointer;">Resend OTP</a>
                 </div>
+                <div style="text-align: center; margin-top: 0.75rem;">
+                    <a onclick="closeModal('modal-otp'); navigateTo('landing');" style="color: var(--mist); font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        &larr; Back to Home
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -339,7 +351,7 @@
         <div class="modal-card">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 class="card-title">Sign In</h3>
-                <button onclick="closeModal('modal-signin')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-signin')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <form onsubmit="handleSignin(event)">
@@ -361,6 +373,11 @@
                 <div style="text-align: center; margin-top: 1.25rem; font-size: 0.875rem;">
                     Don't have an account? <a onclick="showAuthModal('signup')" style="color: var(--primary); font-weight: 600; cursor: pointer;">Create an account</a>
                 </div>
+                <div style="text-align: center; margin-top: 0.75rem;">
+                    <a onclick="closeModal('modal-signin'); navigateTo('landing');" style="color: var(--mist); font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        &larr; Back to Home
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -370,7 +387,7 @@
         <div class="modal-card">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 class="card-title">Reset Password</h3>
-                <button onclick="closeModal('modal-forgot')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-forgot')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <p style="font-size: 0.875rem; color: var(--slate-600); margin-bottom: 1.25rem;">
@@ -385,6 +402,11 @@
                         Send Reset OTP &rarr;
                     </button>
                 </form>
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a onclick="closeModal('modal-forgot'); navigateTo('landing');" style="color: var(--mist); font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        &larr; Back to Home
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -394,7 +416,7 @@
         <div class="modal-card">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 class="card-title">Set New Password</h3>
-                <button onclick="closeModal('modal-reset')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-reset')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <p style="font-size: 0.875rem; color: var(--slate-600); margin-bottom: 1.25rem;">
@@ -427,7 +449,7 @@
         <div class="modal-card">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 id="modal-expense-title-text" class="card-title">Add New Expense</h3>
-                <button onclick="closeModal('modal-expense')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-expense')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <form onsubmit="handleSaveExpense(event)">
@@ -471,7 +493,7 @@
         <div class="modal-card" style="border-top: 4px solid var(--danger);">
             <div class="card-header" style="justify-content: space-between;">
                 <h3 class="card-title" style="color: var(--danger);">Delete Expense</h3>
-                <button onclick="closeModal('modal-delete')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+                <button class="modal-close-btn" onclick="closeModal('modal-delete')" title="Close">&times;</button>
             </div>
             <div class="card-body">
                 <p style="font-size: 1rem; color: var(--slate-700); margin-bottom: 1.25rem;">

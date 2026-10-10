@@ -921,11 +921,11 @@ body {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.45rem 0.95rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line);
+  background: rgba(70, 183, 255, 0.08);
+  border: 1px solid rgba(70, 183, 255, 0.3);
   border-radius: var(--radius-full);
   color: var(--bone);
-  font-size: 0.825rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -934,11 +934,34 @@ body {
 }
 
 .btn-back-home:hover {
-  background: rgba(70, 183, 255, 0.12);
+  background: rgba(70, 183, 255, 0.2);
   border-color: var(--tide);
-  color: var(--tide);
+  color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(70, 183, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(70, 183, 255, 0.35);
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  color: var(--bone);
+  font-size: 1.3rem;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: var(--tide);
+  transform: scale(1.08);
 }
 
 .home-svg-icon {
