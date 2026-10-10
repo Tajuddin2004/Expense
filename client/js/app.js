@@ -55,6 +55,12 @@ function navigateTo(viewName) {
     link.classList.toggle('active', link.dataset.view === viewName);
   });
 
+  // Toggle "Back to Home" navbar button (hidden when on landing, visible on 404/dashboard/expenses)
+  const backHomeBtn = document.getElementById('btn-back-home');
+  if (backHomeBtn) {
+    backHomeBtn.style.display = (State.currentView === 'landing') ? 'none' : 'inline-flex';
+  }
+
   // Load view-specific data
   if (viewName === 'dashboard') loadDashboard();
   if (viewName === 'expenses') loadExpenses();
