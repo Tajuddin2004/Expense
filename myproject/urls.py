@@ -14,11 +14,29 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import mimetypes
 from django.conf import settings
 from django.contrib import admin
+from django.http import FileResponse, Http404
 from django.urls import path, include, re_path
-from django.views.static import serve
 from expenses.views import custom_404_view
+
+
+def serve_client(request, path="index.html"):
+    if not path or path == "":
+        path = "index.html"
+    file_path = settings.BASE_DIR / "client" / path
+    if file_path.is_file():
+        mime_type, _ = mimetypes.guess_type(str(file_path))
+        if path.endswith(".css"):
+            mime_type = "text/css"
+        elif path.endswith(".js"):
+            mime_type = "application/javascript"
+        elif path.endswith(".html"):
+            mime_type = "text/html"
+        return FileResponse(open(file_path, "rb"), content_type=mime_type or "application/octet-stream")
+    raise Http404("File not found")
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,13 +44,18 @@ urlpatterns = [
     path("api/auth/", include("accounts.api_urls")),
     path("api/expenses/", include("expenses.api_urls")),
 
-    # Client Application Route
-    path("client/<path:path>", serve, {"document_root": settings.BASE_DIR / "client"}),
-    path("client/", serve, {"document_root": settings.BASE_DIR / "client", "path": "index.html"}),
+    # Client Application Routes: Root (/) and /client/ both serve the cinematic frontend
+    path("", lambda r: serve_client(r, "index.html")),
+    path("css/<path:path>", lambda r, path: serve_client(r, f"css/{path}")),
+    path("js/<path:path>", lambda r, path: serve_client(r, f"js/{path}")),
+    path("client/<path:path>", lambda r, path: serve_client(r, path)),
+    path("client/", lambda r: serve_client(r, "index.html")),
 
+    # Traditional Django server-rendered routes (for fallback)
     path("accounts/", include("accounts.urls")),
-    path("", include("expenses.urls")),
-    # Catch-all route: serves the custom 404 page for any invalid URL even during DEBUG=True
+    path("expenses/", include("expenses.urls")),
+
+    # Catch-all route: serves the custom 404 page for any invalid URL
     re_path(r"^.*$", custom_404_view),
 ]
 
