@@ -58,6 +58,9 @@ function navigateTo(viewName) {
   // Load view-specific data
   if (viewName === 'dashboard') loadDashboard();
   if (viewName === 'expenses') loadExpenses();
+  if (viewName === 'landing' && window.location.pathname !== '/' && window.location.pathname !== '/client/') {
+    try { window.history.pushState(null, '', '/'); } catch(err) {}
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -101,19 +104,28 @@ function updateNavbar() {
   }
 }
 
-// Check initial auth state
+// Check initial auth state & route
 async function checkAuth() {
+  const p = window.location.pathname.replace(/\/+$/, '');
+  const isKnownPath = p === '' || p === '/client' || p === '/client/index.html';
+
   const res = await API.getCurrentUser();
   if (res.success && res.data.authenticated) {
     State.user = res.data.user;
     updateNavbar();
-    if (State.currentView === 'landing') {
+    if (!isKnownPath) {
+      navigateTo('404');
+    } else {
       navigateTo('dashboard');
     }
   } else {
     State.user = null;
     updateNavbar();
-    navigateTo('landing');
+    if (!isKnownPath) {
+      navigateTo('404');
+    } else {
+      navigateTo('landing');
+    }
   }
 }
 

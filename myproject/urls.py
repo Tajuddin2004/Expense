@@ -52,6 +52,8 @@ urlpatterns = [
     path("", lambda r: serve_client(r, "index.html")),
     path("css/<path:path>", lambda r, path: serve_client(r, f"css/{path}")),
     path("js/<path:path>", lambda r, path: serve_client(r, f"js/{path}")),
+    re_path(r"^(?:.*/)?css/(?P<path>.*)$", lambda r, path: serve_client(r, f"css/{path}")),
+    re_path(r"^(?:.*/)?js/(?P<path>.*)$", lambda r, path: serve_client(r, f"js/{path}")),
     path("client/<path:path>", lambda r, path: serve_client(r, path)),
     path("client/", lambda r: serve_client(r, "index.html")),
 
