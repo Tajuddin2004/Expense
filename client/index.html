@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExpenseTracker &bull; Take Control of Your Finances</title>
+    <meta name="description" content="A cinematic, decoupled expense management platform. Track daily spending in INR, analyse category breakdowns, and stay cloud-synced — secured by OTP.">
+    <!-- Google Fonts: Inter + Space Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand" onclick="navigateTo('landing')">
+                <span class="nav-brand-icon">₹</span>
+                <span>Expense<span style="color:var(--mist)">Tracker</span></span>
+            </div>
+            <nav>
+                <ul id="nav-links" class="nav-links">
+                    <!-- Populated dynamically via app.js -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Views Container -->
+    <main class="main-container">
+
+        <!-- VIEW 1: LANDING PAGE -->
+        <section id="view-landing" class="view active">
+
+            <!-- Animated canvas starfield -->
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
+            <!-- Teal glow blob -->
+            <div class="hero-glow"></div>
+            <!-- Bottom fade -->
+            <div class="hero-bottom-fade"></div>
+
+            <!-- Hero Content -->
+            <div class="hero">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    OTP Verified &bull; Cloud MySQL &bull; REST API
+                </div>
+
+                <h1 class="hero-title">
+                    Track every rupee.<br>
+                    <span class="hero-title-accent">Own your finances.</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    A decoupled, cinematic expense platform. Log spending in INR&nbsp;₹, 
+                    analyse category breakdowns, and stay cloud-synced — 
+                    secured by email OTP from day one.
+                </p>
+
+                <div class="hero-cta">
+                    <button class="btn btn-primary btn-lg" onclick="showAuthModal('signup')">
+                        Get Started Free &nbsp;&rarr;
+                    </button>
+                    <button class="btn btn-secondary btn-lg" onclick="showAuthModal('signin')">
+                        Sign In to Dashboard
+                    </button>
+                </div>
+
+                <!-- Social proof strip -->
+                <div class="hero-proof">
+                    <div class="hero-avatars">
+                        <span class="hero-avatar" style="background:radial-gradient(circle at 30% 30%,#46b7ff,#07080a)"></span>
+                        <span class="hero-avatar" style="background:radial-gradient(circle at 30% 30%,#8bf3e6,#07080a)"></span>
+                        <span class="hero-avatar" style="background:radial-gradient(circle at 30% 30%,#a78bfa,#07080a)"></span>
+                    </div>
+                    <span>Built for <strong style="color:var(--bone)">personal finance</strong> — no spreadsheets needed</span>
+                </div>
+            </div>
+
+            <!-- Marquee Tech Strip -->
+            <div class="marquee-strip">
+                <div class="marquee-inner">
+                    <span class="marquee-item">Django REST&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Aiven MySQL&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Google SMTP&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">OTP Auth&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">SSL Encrypted&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">INR ₹ Tracking&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Decoupled API&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Category Analytics&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Django REST&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Aiven MySQL&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Google SMTP&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">OTP Auth&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">SSL Encrypted&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">INR ₹ Tracking&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Decoupled API&nbsp;<span class="marquee-sep">✦</span></span>
+                    <span class="marquee-item">Category Analytics&nbsp;<span class="marquee-sep">✦</span></span>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="features-header">
+                    <p class="features-eyebrow">Why ExpenseTracker</p>
+                    <h2 class="features-title">Everything you need, nothing you don't</h2>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📩</div>
+                        <h3 class="feature-title">Google SMTP OTP Verification</h3>
+                        <p class="feature-desc">
+                            Sign up securely with a 6-digit one-time code sent to your Gmail inbox.
+                            Includes OTP-based password recovery — no magic links, no passwords alone.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🐬</div>
+                        <h3 class="feature-title">Aiven Cloud MySQL — Always Synced</h3>
+                        <p class="feature-desc">
+                            All your transactions live in a high-performance cloud MySQL database with SSL.
+                            Every user gets isolated, encrypted storage — from day one.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 class="feature-title">Decoupled REST API Architecture</h3>
+                        <p class="feature-desc">
+                            A clean Client-Server split. The Django backend serves battle-tested REST APIs;
+                            the vanilla JS client renders instant, reactive UI updates without a framework.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- VIEW 2: DASHBOARD -->
+        <section id="view-dashboard" class="view">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; flex-wrap: wrap; gap: 1rem; padding: 2rem 1.5rem 0;">
+                <div>
+                    <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--bone); letter-spacing: -0.03em;">Spending Overview</h1>
+                    <p style="color: var(--mist); font-size: 0.9rem; margin-top: 0.2rem;">Live personal financial statistics</p>
+                </div>
+                <div>
+                    <button class="btn btn-tide" onclick="openExpenseModal()">+ Record New Expense</button>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Total Spending</span>
+                    <span id="dash-total" class="stat-value stat-highlight">₹0.00</span>
+                    <span class="stat-subtext">Across all recorded items</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Current Month (<span id="dash-month-name">Month</span>)</span>
+                    <span id="dash-month" class="stat-value">₹0.00</span>
+                    <span class="stat-subtext">This month's expenses</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Transactions</span>
+                    <span id="dash-count" class="stat-value">0</span>
+                    <span class="stat-subtext">Recorded expense entries</span>
+                </div>
+            </div>
+
+            <div class="section-grid">
+                <!-- Category Breakdown -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Spending by Category</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="dash-categories">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Expenses -->
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Recent Expenses</h2>
+                        <a onclick="navigateTo('expenses')" style="font-size: 0.85rem; color: var(--primary); font-weight: 600; cursor: pointer;">View all &rarr;</a>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <div id="dash-recent">
+                            <!-- Populated dynamically via app.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: ALL EXPENSES -->
+        <section id="view-expenses" class="view">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; flex-wrap: wrap; gap: 1rem; padding: 2rem 1.5rem 0;">
+                <div>
+                    <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--bone); letter-spacing: -0.03em;">All Expenses</h1>
+                    <p id="expenses-count-total" style="color: var(--mist); font-size: 0.9rem; margin-top: 0.2rem;">0 transactions</p>
+                </div>
+                <div>
+                    <button class="btn btn-tide" onclick="openExpenseModal()">+ Add New Expense</button>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div id="expenses-table-container">
+                    <!-- Populated dynamically via app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: 404 NOT FOUND -->
+        <section id="view-404" class="view">
+            <div class="form-card" style="max-width: 650px; margin: 3rem auto; text-align: center;">
+                <div class="content-card" style="padding: 3.5rem 2rem;">
+                    <div style="font-size: 5rem; line-height: 1; margin-bottom: 1rem;">🧭</div>
+                    <div class="hero-badge" style="background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.25); margin-bottom: 1rem;">
+                        Error 404 &bull; Page Not Found
+                    </div>
+                    <h1 class="page-title" style="font-size: 2.25rem; margin-bottom: 0.75rem;">Lost in the Numbers?</h1>
+                    <p style="color: var(--slate-600); font-size: 1.05rem; line-height: 1.6; max-width: 480px; margin: 0 auto 2.5rem;">
+                        The page or view you are trying to reach doesn't exist or has moved.
+                    </p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-primary btn-lg" onclick="navigateTo('landing')">
+                            &larr; Go to Home Page
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        ExpenseTracker &nbsp;✦&nbsp; Decoupled Client-Server &nbsp;✦&nbsp; Aiven MySQL &nbsp;✦&nbsp; OTP Secured
+    </footer>
+
+    <!-- ====================================================================
+         MODALS
+         ==================================================================== -->
+
+    <!-- Modal: Sign Up -->
+    <div id="modal-signup" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 class="card-title">Create Account</h3>
+                <button onclick="closeModal('modal-signup')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input id="signup-name" type="text" class="form-input" placeholder="Your full name (e.g. John Doe)">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input id="signup-username" type="text" class="form-input" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input id="signup-email" type="email" class="form-input" placeholder="name@example.com" required>
+                        <span style="font-size: 0.775rem; color: var(--slate-400); margin-top: 0.3rem; display: block;">
+                            A 6-digit OTP will be dispatched via Google SMTP to this email.
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input id="signup-password" type="password" class="form-input" placeholder="Min 6 characters" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password</label>
+                        <input id="signup-confirm" type="password" class="form-input" placeholder="Re-enter password" minlength="6" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">
+                        Sign Up &amp; Get OTP &rarr;
+                    </button>
+                </form>
+                <div style="text-align: center; margin-top: 1.25rem; font-size: 0.875rem;">
+                    Already have an account? <a onclick="showAuthModal('signin')" style="color: var(--primary); font-weight: 600; cursor: pointer;">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Verify OTP -->
+    <div id="modal-otp" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="text-align: center; display: block;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">📩</div>
+                <h3 class="card-title" style="font-size: 1.4rem;">Verify 6-Digit Code</h3>
+                <p style="font-size: 0.85rem; color: var(--slate-500); margin-top: 0.25rem;">
+                    Sent to <strong id="otp-target-email"></strong>
+                </p>
+            </div>
+            <div class="card-body">
+                <form onsubmit="handleVerifyOtp(event)">
+                    <div class="form-group" style="text-align: center;">
+                        <input id="otp-code" type="text" maxlength="6" class="form-input" placeholder="123456" 
+                               style="text-align: center; font-size: 1.5rem; letter-spacing: 0.3em; font-weight: 700;" required>
+                        <span style="font-size: 0.8rem; color: var(--slate-400); margin-top: 0.4rem; display: block;">Valid for 10 minutes</span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                        Verify &amp; Continue &rarr;
+                    </button>
+                </form>
+                <div style="text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: var(--slate-500);">
+                    Didn't receive the email? <a onclick="handleResendOtp()" style="color: var(--primary); font-weight: 600; cursor: pointer;">Resend OTP</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Sign In -->
+    <div id="modal-signin" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 class="card-title">Sign In</h3>
+                <button onclick="closeModal('modal-signin')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <form onsubmit="handleSignin(event)">
+                    <div class="form-group">
+                        <label class="form-label">Username or Email</label>
+                        <input id="signin-identity" type="text" class="form-input" placeholder="Username or Email" required>
+                    </div>
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                            <label class="form-label">Password</label>
+                            <a onclick="showAuthModal('forgot')" style="font-size: 0.8rem; color: var(--primary); cursor: pointer; font-weight: 500;">Forgot Password?</a>
+                        </div>
+                        <input id="signin-password" type="password" class="form-input" placeholder="Enter password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; margin-top: 0.5rem;">
+                        Sign In &rarr;
+                    </button>
+                </form>
+                <div style="text-align: center; margin-top: 1.25rem; font-size: 0.875rem;">
+                    Don't have an account? <a onclick="showAuthModal('signup')" style="color: var(--primary); font-weight: 600; cursor: pointer;">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Forgot Password -->
+    <div id="modal-forgot" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 class="card-title">Reset Password</h3>
+                <button onclick="closeModal('modal-forgot')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 0.875rem; color: var(--slate-600); margin-bottom: 1.25rem;">
+                    Enter your registered email to receive a 6-digit password reset OTP.
+                </p>
+                <form onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input id="forgot-email" type="email" class="form-input" placeholder="name@example.com" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                        Send Reset OTP &rarr;
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Reset Password Verify -->
+    <div id="modal-reset" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 class="card-title">Set New Password</h3>
+                <button onclick="closeModal('modal-reset')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 0.875rem; color: var(--slate-600); margin-bottom: 1.25rem;">
+                    Enter the OTP code sent to <strong id="reset-target-email"></strong> and choose your new password.
+                </p>
+                <form onsubmit="handleResetPassword(event)">
+                    <div class="form-group" style="text-align: center;">
+                        <label class="form-label">6-Digit Reset OTP</label>
+                        <input id="reset-otp" type="text" maxlength="6" class="form-input" placeholder="123456" 
+                               style="text-align: center; font-size: 1.25rem; letter-spacing: 0.2em; font-weight: 700;" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">New Password</label>
+                        <input id="reset-password" type="password" class="form-input" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm New Password</label>
+                        <input id="reset-confirm" type="password" class="form-input" minlength="6" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem;">
+                        Update Password &rarr;
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Add / Edit Expense -->
+    <div id="modal-expense" class="modal-overlay">
+        <div class="modal-card">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 id="modal-expense-title-text" class="card-title">Add New Expense</h3>
+                <button onclick="closeModal('modal-expense')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <form onsubmit="handleSaveExpense(event)">
+                    <div class="form-group">
+                        <label class="form-label">Title</label>
+                        <input id="exp-title" type="text" class="form-input" placeholder="e.g. Groceries, Train ticket" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹ INR)</label>
+                        <input id="exp-amount" type="number" step="0.01" min="0.01" class="form-input" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select id="exp-category" class="form-select">
+                            <option value="Food">Food</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input id="exp-date" type="date" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description / Notes</label>
+                        <textarea id="exp-description" class="form-textarea" rows="3" placeholder="Optional notes..."></textarea>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('modal-expense')">Cancel</button>
+                        <button id="expense-submit-btn" type="submit" class="btn btn-primary">Save Expense</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Confirm Delete -->
+    <div id="modal-delete" class="modal-overlay">
+        <div class="modal-card" style="border-top: 4px solid var(--danger);">
+            <div class="card-header" style="justify-content: space-between;">
+                <h3 class="card-title" style="color: var(--danger);">Delete Expense</h3>
+                <button onclick="closeModal('modal-delete')" style="background: none; border: none; font-size: 1.25rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="card-body">
+                <p style="font-size: 1rem; color: var(--slate-700); margin-bottom: 1.25rem;">
+                    Are you sure you want to permanently delete this expense?
+                </p>
+                <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem;">
+                    <strong id="del-title" style="font-size: 1.05rem; color: var(--slate-900);"></strong>
+                    <div id="del-amount" style="font-size: 1.2rem; font-weight: 800; color: var(--danger); margin-top: 0.25rem;"></div>
+                </div>
+                <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeModal('modal-delete')">Cancel</button>
+                    <button class="btn btn-danger" onclick="handleConfirmDelete()">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Starfield canvas particle animation -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('hero-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let W, H, stars = [], animId;
+
+        function resize() {
+            const landing = document.getElementById('view-landing');
+            W = canvas.width  = landing ? landing.offsetWidth  : window.innerWidth;
+            H = canvas.height = landing ? landing.offsetHeight : window.innerHeight;
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor((W * H) / 6000);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 1.1 + 0.2,
+                    a: Math.random(),
+                    da: (Math.random() * 0.004 + 0.001) * (Math.random() < 0.5 ? 1 : -1),
+                    vy: Math.random() * 0.12 + 0.02
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (const s of stars) {
+                s.a += s.da;
+                if (s.a > 1 || s.a < 0) s.da *= -1;
+                s.y -= s.vy;
+                if (s.y < -2) s.y = H + 2;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(139,243,230,${s.a * 0.6})`;
+                ctx.fill();
+            }
+            animId = requestAnimationFrame(draw);
+        }
+
+        function start() {
+            resize();
+            initStars();
+            if (animId) cancelAnimationFrame(animId);
+            draw();
+        }
+
+        window.addEventListener('resize', () => { resize(); initStars(); });
+        // Start immediately and also watch for view switches
+        start();
+        document.addEventListener('viewChanged', function(e) {
+            if (e.detail === 'landing') start();
+            else if (animId) cancelAnimationFrame(animId);
+        });
+    })();
+    </script>
+</body>
+</html>

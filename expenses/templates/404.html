@@ -1,0 +1,43 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}404 - Page Not Found &bull; Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="form-card" style="max-width: 650px; margin: 3rem auto; text-align: center;">
+    <div class="content-card" style="padding: 3.5rem 2rem;">
+        <div style="font-size: 5rem; line-height: 1; margin-bottom: 1rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));">
+            🧭
+        </div>
+        
+        <div class="hero-badge" style="background: #fee2e2; color: #dc2626; margin-bottom: 1rem;">
+            Error 404 &bull; Page Not Found
+        </div>
+
+        <h1 class="page-title" style="font-size: 2.25rem; margin-bottom: 0.75rem;">
+            Lost in the Numbers?
+        </h1>
+        
+        <p style="color: var(--slate-600); font-size: 1.05rem; line-height: 1.6; max-width: 480px; margin: 0 auto 2.5rem;">
+            The page or URL you are trying to reach doesn't exist, was moved, or is temporarily unavailable.
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            {% if user.is_authenticated %}
+                <a href="{% url 'expenses:dashboard' %}" class="btn btn-primary btn-lg">
+                    &larr; Go to Dashboard
+                </a>
+                <a href="{% url 'expenses:expense_list' %}" class="btn btn-secondary btn-lg">
+                    View All Expenses
+                </a>
+            {% else %}
+                <a href="{% url 'expenses:landing' %}" class="btn btn-primary btn-lg">
+                    &larr; Go to Home Page
+                </a>
+                <a href="{% url 'accounts:signin' %}" class="btn btn-secondary btn-lg">
+                    Sign In
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

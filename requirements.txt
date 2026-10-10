@@ -1,0 +1,12 @@
+Django>=5.0,<7.0
+djangorestframework>=3.14.0
+django-cors-headers>=4.3.0
+asgiref>=3.8.0
+dj-database-url>=3.1.0
+PyMySQL>=1.1.0
+cryptography>=42.0.0
+python-dotenv>=1.0.0
+sqlparse>=0.5.0
+tzdata>=2024.1
+whitenoise>=6.6.0
+gunicorn>=21.2.0

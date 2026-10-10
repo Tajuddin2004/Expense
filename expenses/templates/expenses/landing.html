@@ -1,0 +1,88 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}Smart Personal Expense Tracker &bull; Cloud Synced{% endblock %}
+
+{% block content %}
+<div class="landing-hero">
+    <div class="hero-badge">
+        <span>✨ OTP Verified &bull; Cloud Database Synced</span>
+    </div>
+    <h1 class="hero-title">Take Complete Control of Your Personal Finances</h1>
+    <p class="hero-subtitle">
+        A fast, secure, and modern expense management platform. Track daily spending in INR (₹), 
+        analyze category breakdowns, and rest easy knowing your database is backed up in the cloud.
+    </p>
+
+    <div class="hero-cta">
+        <a href="{% url 'accounts:signup' %}" class="btn btn-primary btn-lg">
+            Get Started Free with OTP &rarr;
+        </a>
+        <a href="{% url 'accounts:signin' %}" class="btn btn-secondary btn-lg">
+            Sign In to Dashboard
+        </a>
+    </div>
+</div>
+
+<!-- Features Showcase -->
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon" style="background: #eef2ff; color: #4f46e5;">📩</div>
+        <h3 class="feature-title">Google SMTP OTP Verification</h3>
+        <p class="feature-desc">
+            Sign up safely with a one-time 6-digit verification code delivered directly to your Gmail inbox. 
+            Includes easy OTP password recovery.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon" style="background: #ecfdf5; color: #10b981;">🐬</div>
+        <h3 class="feature-title">MySQL Database Synced</h3>
+        <p class="feature-desc">
+            Your transactions are securely stored in a high-speed MySQL database, 
+            ensuring your financial history is safe, organized, and accessible.
+        </p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon" style="background: #fef3c7; color: #d97706;">📊</div>
+        <h3 class="feature-title">Visual Category Analytics</h3>
+        <p class="feature-desc">
+            Real-time ORM aggregations break down your spending across Food, Travel, Shopping, Bills, 
+            and Other categories with monthly tracking.
+        </p>
+    </div>
+</div>
+
+<!-- Preview Showcase Card -->
+<div class="content-card preview-card">
+    <div class="card-header" style="justify-content: center; background: #fafbfc;">
+        <span style="font-size: 0.9rem; font-weight: 700; color: var(--slate-600); letter-spacing: 0.05em; text-transform: uppercase;">
+            Live Dashboard Preview
+        </span>
+    </div>
+    <div class="card-body">
+        <div class="stats-grid" style="margin-bottom: 0;">
+            <div class="stat-card" style="box-shadow: none;">
+                <span class="stat-label">Total Spending</span>
+                <span class="stat-value stat-highlight">₹14,850.00</span>
+                <span class="stat-subtext">Automated live calculation</span>
+            </div>
+            <div class="stat-card" style="box-shadow: none;">
+                <span class="stat-label">This Month</span>
+                <span class="stat-value">₹4,200.00</span>
+                <span class="stat-subtext">October 2026 spending</span>
+            </div>
+            <div class="stat-card" style="box-shadow: none;">
+                <span class="stat-label">Transactions</span>
+                <span class="stat-value">28</span>
+                <span class="stat-subtext">Logged expenses</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="{% url 'accounts:signup' %}" class="btn btn-primary">
+                Create Your Account to Start Tracking &rarr;
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

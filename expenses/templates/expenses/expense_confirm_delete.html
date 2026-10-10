@@ -1,0 +1,49 @@
+{% extends 'expenses/base.html' %}
+
+{% block title %}Delete Expense &bull; Expense Tracker{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <div class="content-card" style="border-top: 4px solid var(--danger);">
+        <div class="card-header">
+            <h1 class="card-title" style="color: var(--danger);">Confirm Deletion</h1>
+        </div>
+        <div class="card-body">
+            <p style="font-size: 1.05rem; color: var(--slate-700); margin-bottom: 1.25rem;">
+                Are you sure you want to permanently delete this expense? This action cannot be undone.
+            </p>
+
+            <div style="background-color: var(--slate-50); border: 1px solid var(--slate-200); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                    <strong style="font-size: 1.15rem; color: var(--slate-900);">{{ expense.title }}</strong>
+                    <span style="font-size: 1.25rem; font-weight: 800; color: var(--danger);">
+                        ₹{{ expense.amount|floatformat:2 }}
+                    </span>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--slate-500);">
+                    <span><strong>Category:</strong> {{ expense.category }}</span> &bull; 
+                    <span><strong>Date:</strong> {{ expense.date|date:"d M, Y" }}</span>
+                </div>
+                {% if expense.description %}
+                    <p style="font-size: 0.875rem; color: var(--slate-600); margin-top: 0.5rem; font-style: italic;">
+                        "{{ expense.description }}"
+                    </p>
+                {% endif %}
+            </div>
+
+            <!-- Safe POST Form for Deletion -->
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-actions">
+                    <a href="{% url 'expenses:expense_list' %}" class="btn btn-secondary">
+                        No, Keep Expense
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        Yes, Delete Expense
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
