@@ -18,8 +18,8 @@ import mimetypes
 from django.conf import settings
 from django.contrib import admin
 from django.http import FileResponse, Http404
+from django.shortcuts import redirect
 from django.urls import path, include, re_path
-from expenses.views import custom_404_view
 
 
 def serve_client(request, path="index.html"):
@@ -38,6 +38,10 @@ def serve_client(request, path="index.html"):
     raise Http404("File not found")
 
 
+def custom_404_view(request, exception=None):
+    return serve_client(request, "index.html")
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # REST API Endpoints (Decoupled Server Backend)
@@ -51,13 +55,11 @@ urlpatterns = [
     path("client/<path:path>", lambda r, path: serve_client(r, path)),
     path("client/", lambda r: serve_client(r, "index.html")),
 
-    # Traditional Django server-rendered routes (for fallback)
-    path("accounts/", include("accounts.urls")),
-    path("expenses/", include("expenses.urls")),
+    # Redirect any old legacy routes directly to root
+    re_path(r"^(?:accounts|expenses)/.*$", lambda r, *a, **kw: redirect("/")),
 
-    # Catch-all route: serves the custom 404 page for any invalid URL
+    # Catch-all route: serves the client frontend
     re_path(r"^.*$", custom_404_view),
 ]
 
-# Custom 404 Error Handler (for DEBUG=False)
-handler404 = 'expenses.views.custom_404_view'
+handler404 = custom_404_view
